@@ -24,7 +24,7 @@ const reviewRouter=require("./routes/review.js");
 const userRouter=require("./routes/user.js");
 
 
-//const MONGO_url="mongodb://127.0.0.1:27017/CozyClouds";
+
 const dbUrl=process.env.ATLASDB_URL;
 
 main().then(()=>{
@@ -75,9 +75,6 @@ const sessionOption={
     },
 };
 
-// app.get("/",(req,res)=>{
-//     res.send("Hii, I am root");
-// });
 
 
 
@@ -100,37 +97,13 @@ app.use((req,res,next)=>{
     next();
 });
 
-// app.get("/demouser", async(req,res)=>{
-//     try{
-//     let fakeUser=new User({
-//         email:"student@gmail.com",
-//         username:"demoStudent",
-//     });
 
-//     let registeredUser=await User.register(fakeUser,"helloworld");
-//     res.send(registeredUser);
-// }catch(err){
-//     res.send(err.message);
-// }
-// });
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/",userRouter);
 
-// app.get("/testListing",async(req,res)=>{
-//     let sampleListing=new Listing({
-//         title:"Corona Villa",
-//         description:"It's a beautiful property by the beach.",
-//         price:2500,
-//         location:"Calangute,Goa",
-//         country:"India",
 
-//     });
-//     await sampleListing.save();
-//     console.log("sample was saved");
-//     res.send("successful testing");
-// });
 
 app.all("/*splat",( req, res, next)=>{
     next(new expressError(404,"Page Not Found!"));
